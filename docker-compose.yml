@@ -1,0 +1,21 @@
+services:
+  app:
+    image: ghcr.io/olaf-baranski/my-first_cicd:latest
+    ports:
+      - "80:80"
+    environment:
+      - DATABASE_URL=postgresql://user:Praktyczne2026@db:5432/mydb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: Praktyczne2026
+      POSTGRES_DB: mydb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
